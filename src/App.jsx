@@ -16,7 +16,6 @@ const Showcase = lazy(() => import('./components/Showcase'))
 const Gallery = lazy(() => import('./components/Gallery'))
 const Features = lazy(() => import('./components/Features'))
 const Stats = lazy(() => import('./components/Stats'))
-const HowItWorks = lazy(() => import('./components/HowItWorks'))
 const Partners = lazy(() => import('./components/Partners'))
 const Testimonials = lazy(() => import('./components/Testimonials'))
 const CTA = lazy(() => import('./components/CTA'))
@@ -127,7 +126,6 @@ function App() {
             {!lite && <SectionDivider />}
             <Features />
             <Stats />
-            <HowItWorks />
             <Partners />
             <Testimonials />
             <CTA />

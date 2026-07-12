@@ -17,9 +17,6 @@ const patterns = {
   features: [
     /مميز|feature|تقارير|report|تنبيه|alert|تطبيق|app|mobile|أمان|security|سحاب|cloud/i,
   ],
-  howItWorks: [
-    /كيف|how|خطو|step|تركيب|install|تشغيل|setup|يبدأ|start/i,
-  ],
   about: [
     /من نحن|about|شركة|company|أبعاد|مدار|orbit|tracking|خبر|experience|سنة/i,
   ],
@@ -43,10 +40,6 @@ export function getChatResponse(input, { t, locale }) {
 
   if (matches(text, 'contact')) {
     return t('chat.responses.contact')
-  }
-
-  if (matches(text, 'howItWorks')) {
-    return t('chat.responses.howItWorks')
   }
 
   if (matches(text, 'about')) {

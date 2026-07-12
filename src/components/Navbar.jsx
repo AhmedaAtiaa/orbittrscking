@@ -10,7 +10,6 @@ const navLinkKeys = [
   { href: '#products', key: 'nav.products' },
   { href: '#gallery', key: 'nav.gallery' },
   { href: '#features', key: 'nav.features' },
-  { href: '#how-it-works', key: 'nav.howItWorks' },
   { href: '#partners', key: 'nav.partners' },
   { href: '#contact', key: 'nav.contact' },
 ]
