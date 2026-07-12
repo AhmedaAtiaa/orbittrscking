@@ -1,14 +1,15 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, ZoomIn } from 'lucide-react'
+import { ArrowUpLeft, ArrowUpRight } from 'lucide-react'
 import { galleryItems } from '../data/images'
 import { useLanguage } from '../i18n/LanguageContext'
 import SafeImage from './ui/SafeImage'
+import { goToService } from '../utils/goToService'
 
 export default function Gallery() {
-  const [selected, setSelected] = useState(null)
   const [filter, setFilter] = useState('all')
-  const { t } = useLanguage()
+  const { t, isRtl } = useLanguage()
+  const Arrow = isRtl ? ArrowUpLeft : ArrowUpRight
 
   const categoryKeys = ['trucks', 'schools', 'cold', 'tech', 'products', 'fleet', 'routes', 'logistics', 'monitoring']
   const categories = [
@@ -20,6 +21,7 @@ export default function Gallery() {
     ...item,
     title: t(`gallery.items.${item.key}`),
     category: t(`gallery.categories.${item.categoryKey}`),
+    serviceTitle: item.serviceId ? t(`services.items.${item.serviceId}.title`) : '',
   }))
 
   const filtered = filter === 'all' ? items : items.filter((g) => g.categoryKey === filter)
@@ -39,6 +41,7 @@ export default function Gallery() {
           <h2 className="text-3xl sm:text-4xl lg:text-6xl font-black mt-3 mb-4">
             {t('gallery.title')} <span className="gradient-text-animated">{t('gallery.titleHighlight')}</span> {t('gallery.titleEnd')}
           </h2>
+          <p className="text-slate-400 text-sm mt-2">{t('gallery.clickHint')}</p>
         </motion.div>
 
         <div className="flex flex-wrap justify-center gap-3 mb-12">
@@ -62,65 +65,43 @@ export default function Gallery() {
         <motion.div layout className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           <AnimatePresence mode="popLayout">
             {filtered.map((item, index) => (
-              <motion.div
+              <motion.button
+                type="button"
                 key={item.key}
                 layout
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.8 }}
                 transition={{ delay: index * 0.05 }}
-                className={`relative overflow-hidden rounded-2xl cursor-pointer group border-beam ${
+                className={`relative overflow-hidden rounded-2xl cursor-pointer group border-beam text-start ${
                   index === 0 ? 'md:col-span-2 md:row-span-2' : index === 3 ? 'md:row-span-2' : ''
                 }`}
-                onClick={() => setSelected(item)}
+                onClick={() => goToService(item.serviceId)}
+                aria-label={`${item.title} — ${item.serviceTitle || ''}`}
               >
                 <div className={`relative ${index === 0 ? 'h-80 md:h-full min-h-[300px]' : index === 3 ? 'h-72 md:h-full min-h-[280px]' : 'h-48'}`}>
                   <SafeImage src={item.src} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-60 group-hover:opacity-85 transition-opacity" />
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                     <div className="w-14 h-14 rounded-full glass flex items-center justify-center">
-                      <ZoomIn className="w-6 h-6" />
+                      <Arrow className="w-6 h-6 text-brand-300" />
                     </div>
                   </div>
                   <div className="absolute bottom-0 end-0 start-0 p-4">
                     <span className="text-xs text-brand-400 font-medium">{item.category}</span>
                     <h3 className="font-bold text-lg">{item.title}</h3>
+                    {item.serviceTitle && (
+                      <p className="text-xs text-slate-400 mt-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
+                        {item.serviceTitle}
+                      </p>
+                    )}
                   </div>
                 </div>
-              </motion.div>
+              </motion.button>
             ))}
           </AnimatePresence>
         </motion.div>
       </div>
-
-      <AnimatePresence>
-        {selected && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-xl flex items-center justify-center p-4"
-            onClick={() => setSelected(null)}
-          >
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              className="relative max-w-5xl w-full"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button onClick={() => setSelected(null)} className="absolute -top-12 start-0 w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-white/10">
-                <X className="w-5 h-5" />
-              </button>
-              <SafeImage src={selected.src} alt={selected.title} className="w-full max-h-[80vh] object-contain rounded-2xl" />
-              <div className="text-center mt-4">
-                <h3 className="text-2xl font-bold">{selected.title}</h3>
-                <p className="text-slate-300">{selected.category}</p>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </section>
   )
 }

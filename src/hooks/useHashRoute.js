@@ -1,15 +1,22 @@
 import { useEffect, useState } from 'react'
 
+/**
+ * @returns {{ name: 'home' | 'privacy' | 'terms' | 'about' | 'careers' | 'service', serviceId?: string }}
+ */
 function parseRoute(hash) {
-  if (hash.startsWith('#/privacy')) return 'privacy'
-  if (hash.startsWith('#/terms')) return 'terms'
-  return 'home'
+  if (hash.startsWith('#/privacy')) return { name: 'privacy' }
+  if (hash.startsWith('#/terms')) return { name: 'terms' }
+  if (hash.startsWith('#/about')) return { name: 'about' }
+  if (hash.startsWith('#/careers')) return { name: 'careers' }
+  const serviceMatch = hash.match(/^#\/service\/([a-zA-Z0-9_-]+)/)
+  if (serviceMatch) return { name: 'service', serviceId: serviceMatch[1] }
+  return { name: 'home' }
 }
 
 /** توجيه بسيط عبر الهاش بدون مكتبة */
 export function useHashRoute() {
   const [route, setRoute] = useState(() =>
-    typeof window !== 'undefined' ? parseRoute(window.location.hash) : 'home'
+    typeof window !== 'undefined' ? parseRoute(window.location.hash) : { name: 'home' }
   )
 
   useEffect(() => {
@@ -19,7 +26,7 @@ export function useHashRoute() {
   }, [])
 
   useEffect(() => {
-    if (route !== 'home') {
+    if (route.name !== 'home') {
       window.scrollTo(0, 0)
     }
   }, [route])

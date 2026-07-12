@@ -32,10 +32,10 @@ function AnimatedCounter({ value, suffix = '' }) {
 }
 
 const statConfig = [
-  { value: 5000, suffix: '+', labelKey: 'stats.clients', color: 'from-brand-500 to-brand-700' },
-  { value: 25000, suffix: '+', labelKey: 'stats.vehicles', color: 'from-accent-500 to-brand-600' },
+  { value: 1500, suffix: '+', labelKey: 'stats.clients', color: 'from-brand-500 to-brand-700' },
+  { value: 8000, suffix: '+', labelKey: 'stats.vehicles', color: 'from-accent-500 to-brand-600' },
   { value: 99, suffix: '.9%', labelKey: 'stats.uptime', color: 'from-brand-400 to-accent-500' },
-  { value: 15, suffix: '+', labelKey: 'stats.experience', color: 'from-orange-500 to-red-500' },
+  { value: 5, suffix: '', labelKey: 'stats.experience', color: 'from-orange-500 to-red-500' },
 ]
 
 export default function Stats() {

@@ -26,6 +26,9 @@ const ParticleNetwork = lazy(() => import('./components/effects/ParticleNetwork'
 const AuroraBackground = lazy(() => import('./components/effects/AuroraBackground'))
 const FloatingOrbs = lazy(() => import('./components/effects/FloatingOrbs'))
 const LegalPage = lazy(() => import('./pages/LegalPage'))
+const AboutPage = lazy(() => import('./pages/AboutPage'))
+const CareersPage = lazy(() => import('./pages/CareersPage'))
+const ServiceDetailPage = lazy(() => import('./pages/ServiceDetailPage'))
 
 function SectionFallback() {
   return <div className="min-h-[120px]" aria-hidden />
@@ -36,7 +39,11 @@ function App() {
   const [loaded, setLoaded] = useState(false)
   const { lite, ready } = usePerfMode()
   const route = useHashRoute()
-  const isLegal = route === 'privacy' || route === 'terms'
+  const isLegal = route.name === 'privacy' || route.name === 'terms'
+  const isAbout = route.name === 'about'
+  const isCareers = route.name === 'careers'
+  const isService = route.name === 'service'
+  const isSubpage = isLegal || isAbout || isCareers || isService
 
   useEffect(() => {
     const timer = setTimeout(() => setLoaded(true), lite ? 600 : 900)
@@ -60,14 +67,14 @@ function App() {
   return (
     <div className={`relative min-h-screen ${lite ? 'perf-lite' : ''}`}>
       <Preloader done={loaded} />
-      {!lite && !isLegal && <ScrollProgress />}
+      {!lite && !isSubpage && <ScrollProgress />}
 
       <Suspense fallback={null}>
         {!lite && ready && (
           <>
             <AuroraBackground />
             <FloatingOrbs />
-            {!isLegal && <ParticleNetwork />}
+            {!isSubpage && <ParticleNetwork />}
           </>
         )}
       </Suspense>
@@ -75,17 +82,35 @@ function App() {
       <div className="fixed inset-0 -z-10">
         <div className="absolute inset-0 bg-gradient-to-b from-surface-900 via-surface-950 to-surface-975" />
         {!lite && <div className="animated-grid absolute inset-0 opacity-70" />}
-        {!lite && !isLegal && (
+        {!lite && !isSubpage && (
           <div className="absolute bottom-0 inset-x-0 h-1/3 hologram-grid opacity-20" />
         )}
       </div>
 
-      <Navbar scrolled={scrolled || isLegal} />
+      <Navbar scrolled={scrolled || isSubpage} />
 
       {isLegal ? (
         <main>
           <Suspense fallback={<SectionFallback />}>
-            <LegalPage type={route} />
+            <LegalPage type={route.name} />
+          </Suspense>
+        </main>
+      ) : isAbout ? (
+        <main>
+          <Suspense fallback={<SectionFallback />}>
+            <AboutPage />
+          </Suspense>
+        </main>
+      ) : isCareers ? (
+        <main>
+          <Suspense fallback={<SectionFallback />}>
+            <CareersPage />
+          </Suspense>
+        </main>
+      ) : isService ? (
+        <main>
+          <Suspense fallback={<SectionFallback />}>
+            <ServiceDetailPage serviceId={route.serviceId} />
           </Suspense>
         </main>
       ) : (

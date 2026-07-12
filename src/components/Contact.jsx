@@ -6,13 +6,16 @@ import { useLanguage } from '../i18n/LanguageContext'
 import SafeImage from './ui/SafeImage'
 
 const serviceOptions = [
-  { value: 'trucks', key: 'trucks' },
-  { value: 'school', key: 'school' },
-  { value: 'cold', key: 'cold' },
   { value: 'gps', key: 'gps' },
-  { value: 'dashcam', key: 'dashcam' },
-  { value: 'temp-sensor', key: 'tempSensor' },
-  { value: 'fuel-sensor', key: 'fuelSensor' },
+  { value: 'rental', key: 'rental' },
+  { value: 'temp', key: 'temp' },
+  { value: 'weight', key: 'weight' },
+  { value: 'school', key: 'school' },
+  { value: 'specialized', key: 'specialized' },
+  { value: 'fuel', key: 'fuel' },
+  { value: 'equipment', key: 'equipment' },
+  { value: 'waste', key: 'waste' },
+  { value: 'dashcamAi', key: 'dashcamAi' },
   { value: 'other', key: 'other' },
 ]
 

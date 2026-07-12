@@ -194,6 +194,10 @@
   animation: marqueeXRev linear infinite;
 }
 
+.partners-marquee:hover .partners-marquee-track {
+  animation-play-state: paused;
+}
+
 @keyframes marqueeX {
   from { transform: translate3d(0, 0, 0); }
   to { transform: translate3d(-50%, 0, 0); }
@@ -291,8 +295,17 @@
   100% { transform: rotate(360deg) translateX(120px) rotate(-360deg); }
 }
 
-.sparkle-dot { animation: sparkle 2s ease-in-out infinite; }
-.ripple-ring { animation: ripple 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+.service-flash {
+  animation: serviceFlash 1.6s ease-out;
+  outline: 2px solid rgba(255, 102, 0, 0.85);
+  outline-offset: 4px;
+}
+
+@keyframes serviceFlash {
+  0% { box-shadow: 0 0 0 0 rgba(255, 102, 0, 0.55); }
+  40% { box-shadow: 0 0 40px 8px rgba(255, 102, 0, 0.35); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 102, 0, 0); }
+}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

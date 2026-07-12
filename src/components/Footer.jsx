@@ -14,16 +14,15 @@ export default function Footer() {
 
   const footerSections = {
     services: [
-      { labelKey: 'footer.links.truckTracking', href: '#services' },
+      { labelKey: 'footer.links.gpsTracking', href: '#services' },
       { labelKey: 'footer.links.schoolTransport', href: '#services' },
-      { labelKey: 'footer.links.coldVehicles', href: '#services' },
-      { labelKey: 'footer.links.products', href: '#products' },
+      { labelKey: 'footer.links.tempMonitoring', href: '#services' },
+      { labelKey: 'footer.links.dashcamAi', href: '#services' },
     ],
     company: [
-      { labelKey: 'footer.links.about', href: '#gallery' },
-      { labelKey: 'footer.links.team', href: '#' },
-      { labelKey: 'footer.links.careers', href: '#' },
-      { labelKey: 'footer.links.blog', href: '#' },
+      { labelKey: 'footer.links.about', href: '#/about' },
+      { labelKey: 'footer.links.team', href: '#/about' },
+      { labelKey: 'footer.links.careers', href: '#/careers' },
     ],
     support: [
       { labelKey: 'footer.links.help', href: '#contact' },

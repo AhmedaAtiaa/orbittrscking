@@ -2,13 +2,14 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Satellite, Camera, Thermometer, Fuel, Cpu, Wifi,
-  ArrowLeft, ArrowRight, CheckCircle2, X, ZoomIn, Package
+  ArrowLeft, ArrowRight, CheckCircle2, X, ZoomIn, Package, ExternalLink
 } from 'lucide-react'
 import { productCatalog } from '../data/images'
 import { useLanguage } from '../i18n/LanguageContext'
 import { RevealOnScroll, StaggerContainer, StaggerItem } from './effects/AnimatedText'
 import SpotlightCard from './effects/SpotlightCard'
 import SafeImage from './ui/SafeImage'
+import { goToService } from '../utils/goToService'
 
 const iconMap = {
   'gps-tracker': Satellite,
@@ -59,7 +60,18 @@ export default function Products() {
               <StaggerItem key={product.id}>
                 <SpotlightCard className="h-full">
                   <article className="group relative flex flex-col rounded-3xl overflow-hidden border border-white/10 bg-slate-900/50 hover:border-brand-500/30 transition-colors duration-300 h-full border-beam">
-                    <div className="relative h-56 overflow-hidden bg-slate-800">
+                    <div
+                      className="relative h-56 overflow-hidden bg-slate-800 cursor-pointer"
+                      onClick={() => goToService(product.serviceId)}
+                      role="link"
+                      tabIndex={0}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault()
+                          goToService(product.serviceId)
+                        }
+                      }}
+                    >
                       <SafeImage src={product.image} alt={info.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent" />
                       {info.badge && (
@@ -73,12 +85,21 @@ export default function Products() {
                         </motion.span>
                       )}
                       <button
-                        onClick={() => setSelected({ ...product, ...info })}
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          setSelected({ ...product, ...info })
+                        }}
                         className="absolute top-4 start-4 w-9 h-9 rounded-full glass flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white/10"
                         aria-label={`${t('products.zoom')} ${info.name}`}
                       >
                         <ZoomIn className="w-4 h-4" />
                       </button>
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                        <div className="w-12 h-12 rounded-full glass flex items-center justify-center">
+                          <ExternalLink className="w-5 h-5 text-brand-300" />
+                        </div>
+                      </div>
                       <motion.div
                         whileHover={{ rotate: 360 }}
                         transition={{ duration: 0.5 }}

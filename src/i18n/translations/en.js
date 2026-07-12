@@ -1,4 +1,6 @@
-﻿export default {
+﻿import servicePages from './servicePages.en'
+
+export default {
   company: {
     name: 'Orbit',
     nameEn: 'Orbit',
@@ -6,7 +8,7 @@
     tagline: 'Tracking Without Limits',
     description: 'A leading provider of vehicle and fleet tracking solutions. We deliver advanced technology to ensure safe and efficient transport operations.',
     email: 'info@orbittracking.com',
-    phone: '054 129 4487',
+    phone: '+966 54 129 4487',
     address: 'Riyadh - Kingdom of Saudi Arabia',
     hours: 'Sun - Thu: 8 AM - 6 PM',
     whatsapp: 'Chat on WhatsApp',
@@ -29,7 +31,7 @@
     description: 'Complete solutions for truck tracking, school transport, and refrigerated vehicles. Monitor your fleet in real time with advanced technology.',
     ctaPrimary: 'Start Free Trial',
     ctaSecondary: 'Explore Solutions',
-    statClients: '5000+ Clients',
+    statClients: '1500+ Clients',
     statSecurity: '99.9% Security',
     statSupport: '24/7 Support',
     connectedVehicles: 'Vehicles Connected Now',
@@ -45,28 +47,81 @@
   },
   services: {
     label: 'Our Services',
-    title: 'Specialized',
+    title: '',
     titleHighlight: 'Orbit',
     titleEnd: 'Solutions',
-    subtitle: 'Tailored solutions for every transport sector, designed to meet your unique needs',
+    subtitle: 'Specialized tracking and fleet management solutions for every sector — built to improve efficiency and cut operating costs',
     learnMore: 'Learn More',
     featured: 'Featured Service',
-    coldBadge: '❄ Refrigerated Trucks',
+    coldBadge: '❄ Cold Chain',
     items: {
-      trucks: {
-        title: 'Truck Tracking',
-        description: 'Monitor heavy and light trucks in real time. Track routes, driving speed, fuel consumption, and stop times.',
-        features: ['Precise GPS tracking', 'Fuel reports', 'Speed alerts', 'Route history'],
+      gps: {
+        title: 'GPS Tracking Solutions',
+        description:
+          'Orbit provides advanced GPS tracking solutions that enable real-time vehicle monitoring, including live location, trip history, speed, engine hours, instant alerts, and analytical reports to improve fleet efficiency and reduce operating costs.',
+        features: ['Live GPS location', 'Trip history & speed', 'Engine hours', 'Alerts & analytical reports'],
+      },
+      rental: {
+        title: 'Car Rental Tracking Solutions',
+        description:
+          'Designed specifically for car rental companies, our solutions provide real-time tracking, vehicle utilization monitoring, geofencing, and unauthorized usage alerts to enhance asset protection and operational efficiency.',
+        features: ['Real-time fleet tracking', 'Utilization monitoring', 'Geofencing', 'Unauthorized usage alerts'],
+      },
+      temp: {
+        title: 'Temperature & Humidity Monitoring',
+        description:
+          'Smart monitoring solutions for temperature and humidity in refrigerated vehicles and warehouses, featuring instant alerts and detailed reports to ensure product integrity and cold chain compliance.',
+        features: ['Temp & humidity monitoring', 'Instant alerts', 'Detailed reports', 'Cold chain compliance'],
+      },
+      weight: {
+        title: 'Truck Weight Management',
+        description:
+          'Advanced truck weight management solutions that monitor payloads in real time, helping prevent overloading, optimize load distribution, reduce fuel consumption, and ensure regulatory compliance.',
+        features: ['Real-time weight monitoring', 'Prevent overloading', 'Optimize load distribution', 'Regulatory compliance'],
       },
       school: {
-        title: 'School Transport',
-        description: 'Student safety is our priority. Track school buses with instant parent notifications on arrival and departure.',
-        features: ['Parent notifications', 'Attendance tracking', 'Safe routes', 'CCTV integration'],
+        title: 'School Transportation Solutions',
+        description:
+          'Comprehensive school transportation solutions featuring live tracking, route monitoring, arrival and departure notifications, and performance reports to ensure student safety and operational excellence.',
+        features: ['Live bus tracking', 'Route monitoring', 'Arrival & departure alerts', 'Performance reports'],
       },
-      cold: {
-        title: 'Refrigerated Vehicles',
-        description: 'Protect product quality. Monitor temperature and humidity in refrigerated trucks with instant deviation alerts.',
-        features: ['Temperature monitoring', '24/7 temperature log', 'Deviation alerts', 'Compliance reports'],
+      specialized: {
+        title: 'Specialized & Contract Transportation',
+        description:
+          'Smart fleet management solutions for specialized and contract transportation, offering real-time tracking, trip management, driver monitoring, and operational reporting for maximum fleet performance.',
+        features: ['Real-time tracking', 'Trip management', 'Driver monitoring', 'Operational reporting'],
+      },
+      fuel: {
+        title: 'Fuel Management Solutions',
+        description:
+          'Advanced fuel management solutions that monitor fuel consumption and tank levels, detect refueling and draining events, identify abnormal fuel usage, and provide analytical reports to reduce operating costs.',
+        features: ['Consumption & tank levels', 'Refuel & drain detection', 'Abnormal usage alerts', 'Cost-saving reports'],
+      },
+      equipment: {
+        title: 'Equipment Management Solutions',
+        description:
+          'Professional equipment management solutions for tracking heavy machinery and assets, including location tracking, engine hours monitoring, preventive maintenance scheduling, and utilization analysis to maximize asset lifespan and productivity.',
+        features: ['Equipment location', 'Engine hours', 'Preventive maintenance', 'Utilization analysis'],
+      },
+      waste: {
+        title: 'Waste Management Solutions',
+        description:
+          'Orbit provides smart Waste Management Solutions for waste collection and transportation fleets. The solution enables real-time vehicle tracking, route and schedule compliance monitoring, fleet performance analysis, operational reporting, and instant alerts to improve efficiency, reduce operating costs, and enhance municipal and environmental services.',
+        features: ['Collection fleet tracking', 'Route & schedule compliance', 'Fleet performance analysis', 'Operational alerts & reports'],
+      },
+      dashcamAi: {
+        title: 'AI Dash Cam Solutions',
+        description:
+          'Enhance fleet safety with intelligent AI-powered dash cameras that provide real-time video monitoring, driver behavior analysis, and advanced safety alerts to reduce accidents and improve operational efficiency.',
+        features: [
+          'Front, cabin, and rear HD cameras',
+          'ADAS road safety alerts',
+          'DMS for fatigue, distraction & phone use',
+          'Live video streaming with GPS',
+          'Automatic event recording & secure storage',
+          'Instant alerts for risky driving & collisions',
+          'Cloud-based video management',
+        ],
       },
     },
   },
@@ -80,7 +135,7 @@
     requestProduct: 'Order This Product',
     zoom: 'Zoom',
     warranty: [
-      { label: '3-Year Warranty', sub: 'On all devices' },
+      { label: '2-Year Warranty', sub: 'On all devices' },
       { label: 'Free Installation', sub: 'With fleet packages' },
       { label: 'Technical Support', sub: 'Around the clock' },
       { label: 'Certified', sub: 'Standards compliant' },
@@ -134,7 +189,7 @@
     titleEnd: 'Your Success Partner',
     description: 'Orbit is a regional leader in vehicle and fleet tracking. We combine cutting-edge GPS and AI to deliver integrated solutions that ensure safety and operational efficiency.',
     highlights: [
-      '15+ years of tracking expertise',
+      '5 years of tracking expertise',
       'Dedicated engineering team 24/7',
       'Nationwide coverage across the Kingdom',
       'Custom solutions for every transport sector',
@@ -152,6 +207,7 @@
     titleHighlight: 'Solutions',
     titleEnd: 'in Action',
     subtitle: '',
+    clickHint: 'Tap any image to open the matching solution details',
     all: 'All',
     categories: {
       trucks: 'Trucks',
@@ -169,14 +225,18 @@
       schoolBus: 'School Transport',
       refrigerated: 'Cold Chain Transport',
       dashboard: 'Control Dashboard',
+      mobileApp: 'Mobile App',
       productGps: 'GPS Tracker',
       productDashcam: 'Dash Cam',
       productTemp: 'Temperature Sensor',
       productFuel: 'Fuel Sensor',
-      fleet: 'Fleet Management',
-      highway: 'Route Tracking',
+      fleet: 'Car Rental Tracking',
+      highway: 'Specialized Transport',
       logistics: 'Logistics Services',
       controlRoom: 'Monitoring Room',
+      weight: 'Weight Management',
+      equipment: 'Equipment Management',
+      waste: 'Waste Management',
     },
     marquee: 'Gallery',
   },
@@ -243,7 +303,7 @@
   },
   cta: {
     title: 'Join the Orbit Family',
-    description: 'Over 5,000 companies trust our solutions. Start your 30-day free trial with no commitment.',
+    description: 'Over 1,500 companies trust our solutions. Start your 30-day free trial with no commitment.',
     primary: 'Start Free Trial',
     secondary: 'Call Us Now',
     alt: 'Fleet',
@@ -271,13 +331,16 @@
       submit: 'Send Request',
       success: 'Sent successfully ✓',
       options: {
-        trucks: 'Truck Tracking',
-        school: 'School Transport',
-        cold: 'Refrigerated Vehicles',
-        gps: 'GPS Tracker',
-        dashcam: 'Dash Cam',
-        tempSensor: 'Temperature & Humidity Sensor',
-        fuelSensor: 'Fuel Sensor',
+        gps: 'GPS Tracking Solutions',
+        rental: 'Car Rental Tracking',
+        temp: 'Temperature & Humidity Monitoring',
+        weight: 'Truck Weight Management',
+        school: 'School Transportation',
+        specialized: 'Specialized & Contract Transport',
+        fuel: 'Fuel Management',
+        equipment: 'Equipment Management',
+        waste: 'Waste Management',
+        dashcamAi: 'AI Dash Cam Solutions',
         other: 'Other',
       },
     },
@@ -285,8 +348,11 @@
   footer: {
     sections: { services: 'Services', company: 'Company', support: 'Support' },
     links: {
+      gpsTracking: 'GPS Tracking Solutions',
+      schoolTransport: 'School Transportation',
+      tempMonitoring: 'Temperature & Humidity Monitoring',
+      dashcamAi: 'AI Dash Cam Solutions',
       truckTracking: 'Truck Tracking',
-      schoolTransport: 'School Transport',
       coldVehicles: 'Refrigerated Vehicles',
       products: 'Our Products',
       about: 'About Us',
@@ -424,6 +490,85 @@
       },
     ],
   },
+  aboutPage: {
+    back: 'Back to home',
+    eyebrow: 'Orbit',
+    title: 'About Us',
+    intro:
+      'Orbit is a Saudi company specializing in vehicle and fleet tracking. We combine GPS, AI, and cloud monitoring platforms to help organizations run safer, more efficient fleets across the Kingdom.',
+    ctaContact: 'Contact us',
+    ctaCareers: 'Join our team',
+    stats: [
+      { value: '1,500+', label: 'Happy clients' },
+      { value: '8,000+', label: 'Tracked vehicles' },
+      { value: '99.9%', label: 'Uptime' },
+      { value: '5', label: 'Years experience' },
+    ],
+    mission: {
+      title: 'Our mission',
+      body: 'Empower businesses to manage their vehicles with confidence through reliable, easy-to-use tracking solutions backed by a local 24/7 technical team.',
+    },
+    vision: {
+      title: 'Our vision',
+      body: 'To be the leading technology partner for smart fleet tracking in Saudi Arabia and the region — world-class standards with a Saudi identity.',
+    },
+    valuesTitle: 'Our values',
+    values: [
+      {
+        title: 'Reliability',
+        body: 'We stand behind device quality, platform stability, and continuous support — because fleet downtime means business downtime.',
+      },
+      {
+        title: 'Partnership',
+        body: 'We work as one team with our clients: we understand their sector and design the right operational solution.',
+      },
+      {
+        title: 'Innovation',
+        body: 'We keep pace with tracking, sensors, and AI to deliver real value in the field.',
+      },
+      {
+        title: 'Safety',
+        body: 'Passenger, driver, and cargo safety sit at the heart of every solution — from school transport to the cold chain.',
+      },
+    ],
+    whyTitle: 'Why Orbit?',
+    why: [
+      'End-to-end solutions: devices, monitoring platform, mobile app, and support under one roof.',
+      'Sector expertise across trucks, school transport, cold chain, rental, equipment, and waste.',
+      'Local coverage and fast response across the Kingdom.',
+      'Aligned with Saudi market requirements and appropriate information-security standards for fleet data.',
+    ],
+  },
+  careersPage: {
+    back: 'Back to home',
+    eyebrow: 'Careers',
+    title: 'Join the Orbit team',
+    intro:
+      'We are looking for people passionate about technology and customer success to help shape the future of fleet tracking in Saudi Arabia. If you value quality and teamwork, we would love to hear from you.',
+    openingsTitle: 'Open positions',
+    emptyJobs: 'There are no open positions right now. You can still send your CV and we will contact you when a suitable role opens.',
+    apply: 'Apply now',
+    emailSubject: 'Job application - Orbit',
+    benefitsTitle: 'What we offer',
+    benefits: [
+      'Motivating tech-driven workplace',
+      'Continuous learning and development',
+      'Work on real fleet projects',
+      'Medical insurance and competitive benefits',
+      'Growth opportunities within the company',
+    ],
+    processTitle: 'How to apply',
+    steps: [
+      { title: 'Send your CV', body: 'Email us with the job title in the subject line.' },
+      { title: 'Initial review', body: 'HR reviews applications within a few business days.' },
+      { title: 'Interview', body: 'We schedule a conversation to assess fit and skills.' },
+      { title: 'Offer', body: 'When aligned, we share the offer and next steps.' },
+    ],
+    ctaNote: 'Send your CV and we will reach out when a matching role opens.',
+    ctaEmail: 'Send your CV',
+    ctaWhatsapp: 'WhatsApp us',
+    jobs: [],
+  },
   preloader: {
     loading: 'Loading...',
   },
@@ -445,22 +590,23 @@
       trucks: '🚛 **Truck Tracking**: Monitor your fleet in real time — routes, speed, fuel consumption, and stop times. Includes speed alerts and full route history.\n\n[Get a quote](#contact)',
       school: '🚌 **School Transport**: Student safety first! Track school buses with instant parent notifications on arrival and departure, plus safe routes and cameras.\n\n[Contact us](#contact)',
       cold: '❄️ **Refrigerated Vehicles**: Temperature & humidity monitoring with instant deviation alerts. 24/7 logs and compliance reports.\n\n[Request a consultation](#contact)',
-      products: 'We offer 6 smart devices:\n\n📡 GPS Tracker\n📹 Dashcam\n🌡️ Temp & Humidity Sensor\n⛽ Fuel Sensor\n🔧 OBD Device\n📶 M2M SIM Card\n\nAll with 3-year warranty and free installation on fleet plans.\n\n[Browse products](#products)',
+      products: 'We offer 6 smart devices:\n\n📡 GPS Tracker\n📹 Dashcam\n🌡️ Temp & Humidity Sensor\n⛽ Fuel Sensor\n🔧 OBD Device\n📶 M2M SIM Card\n\nAll with 2-year warranty and free installation on fleet plans.\n\n[Browse products](#products)',
       gps: '📡 **GPS Tracker** — Best seller! Real-time tracking via GPS/GLONASS and 4G, backup battery, IP67 waterproof.\n\n[Request a quote](#contact)',
       dashcam: '📹 **Dashcam** — Full HD/4K recording with night vision and collision detection. Auto cloud upload.\n\n[Order now](#contact)',
       tempSensor: '🌡️ **Temp & Humidity Sensor** — Perfect for cold chain. ±0.5°C accuracy with instant SMS alerts.\n\n[Order now](#contact)',
       fuelSensor: '⛽ **Fuel Sensor** — 99% accurate monitoring to detect tampering and save costs.\n\n[Order now](#contact)',
-      pricing: '💰 We offer a **free 30-day trial** with no commitment!\n\n✅ 3-year device warranty\n✅ Free installation on fleet plans\n✅ 24/7 technical support\n\nFor a custom fleet quote, [contact us](#contact) or call 054 129 4487.',
-      contact: '📞 **Contact us:**\n\nPhone: 054 129 4487\nEmail: info@orbittracking.com\nAddress: Riyadh - Kingdom of Saudi Arabia\nHours: Sun - Thu, 8 AM - 6 PM\n\n[Send your request](#contact)',
+      pricing: '💰 We offer a **free 30-day trial** with no commitment!\n\n✅ 2-year device warranty\n✅ Free installation on fleet plans\n✅ 24/7 technical support\n\nFor a custom fleet quote, [contact us](#contact) or call +966 54 129 4487.',
+      contact: '📞 **Contact us:**\n\nPhone: +966 54 129 4487\nEmail: info@orbittracking.com\nAddress: Riyadh - Kingdom of Saudi Arabia\nHours: Sun - Thu, 8 AM - 6 PM\n\n[Send your request](#contact)',
       features: '⚡ **Platform features:**\n\n📍 Real-time GPS\n🔔 Smart alerts\n📊 Analytics reports\n📱 Mobile app\n🔒 Advanced security\n☁️ Secure cloud\n🌡️ Temperature monitoring\n👥 Driver management\n\n[Learn more](#features)',
       howItWorks: '🔧 **How we work in 4 steps:**\n\n1️⃣ **Install** — professional device setup\n2️⃣ **Connect** — data flows instantly via GPS/4G\n3️⃣ **Monitor** — dashboard & mobile app\n4️⃣ **Support** — 24/7 technical team\n\nAll in under 24 hours!\n\n[Get started](#contact)',
-      about: '🏢 **Orbit** — a leading fleet tracking provider in the Middle East.\n\n✅ 15+ years experience\n✅ 5000+ clients\n✅ 25000+ tracked vehicles\n✅ 99.9% uptime\n\nCombining GPS and AI for fleet safety and efficiency.\n\n[About us](#gallery)',
+      about: '🏢 **Orbit** — a leading fleet tracking provider in the Middle East.\n\n✅ 5 years experience\n✅ 1500+ clients\n✅ 8000+ tracked vehicles\n✅ 99.9% uptime\n\nCombining GPS and AI for fleet safety and efficiency.\n\n[About us](#/about)',
       fallback: 'Sorry, I didn\'t quite understand. 😊 I can help with:\n\n• Services (trucks, schools, cold chain)\n• Products & devices\n• Pricing & offers\n• Contacting our team\n\nTry a quick button below or [contact us directly](#contact).',
     },
   },
   common: {
     imageUnavailable: 'Image unavailable',
   },
+  servicePages,
   meta: {
     title: 'Orbit | Smart Vehicle Tracking Solutions',
     description: 'Orbit - Vehicle tracking solutions for trucks, school transport, and cold chain with cutting-edge technology',
