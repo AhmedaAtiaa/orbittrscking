@@ -15,7 +15,6 @@ export default {
   },
   nav: {
     services: 'Services',
-    products: 'Products',
     gallery: 'Gallery',
     features: 'Features',
     partners: 'Partners',
@@ -526,6 +525,55 @@ export default {
       'Aligned with Saudi market requirements and appropriate information-security standards for fleet data.',
     ],
   },
+  teamPage: {
+    back: 'Back to home',
+    eyebrow: 'Our team',
+    title: 'The team behind Orbit',
+    intro:
+      'A team covering regions across the Kingdom — combining installation, support, sales, and technology expertise to run client fleets efficiently with fast response in every area.',
+    departmentsTitle: 'Team departments',
+    departments: [
+      {
+        title: 'Installation & Operations',
+        body: 'We install trackers and sensors to quality and safety standards, with field coverage across regions of the Kingdom.',
+        benefit: 'Professional installation wherever your fleet operates in Saudi Arabia.',
+      },
+      {
+        title: 'Technical Support',
+        body: 'We handle device and platform issues, diagnose problems, and help operations teams around the clock across regions.',
+        benefit: 'Fast response that reduces vehicle downtime.',
+      },
+      {
+        title: 'Sales & Customer Success',
+        body: 'We understand sector needs, prepare quotes, and support clients from contract to full operation — wherever they are.',
+        benefit: 'Solutions matched to your fleet size and business.',
+      },
+      {
+        title: 'Technology & Platform',
+        body: 'We build and maintain dashboards, apps, and device integrations for service reliability.',
+        benefit: 'A stable platform with a clear user experience.',
+      },
+    ],
+    valuesTitle: 'How we work together',
+    values: [
+      {
+        title: 'Reliability',
+        body: 'We commit to quality and uptime because fleet downtime means business downtime.',
+      },
+      {
+        title: 'Kingdom-wide coverage',
+        body: 'A team ready for support, installation, and follow-up across different regions of Saudi Arabia.',
+      },
+      {
+        title: 'Partnership',
+        body: 'We work as an extension of your operations team — not just a vendor.',
+      },
+    ],
+    ctaTitle: 'Talk to the team or join us',
+    ctaBody: 'Need a fleet consultation? Or want to join Orbit? We are here.',
+    ctaContact: 'Contact us',
+    ctaCareers: 'Careers',
+  },
   careersPage: {
     back: 'Back to home',
     eyebrow: 'Careers',
@@ -577,7 +625,7 @@ export default {
       trucks: '🚛 **Truck Tracking**: Monitor your fleet in real time — routes, speed, fuel consumption, and stop times. Includes speed alerts and full route history.\n\n[Get a quote](#contact)',
       school: '🚌 **School Transport**: Student safety first! Track school buses with instant parent notifications on arrival and departure, plus safe routes and cameras.\n\n[Contact us](#contact)',
       cold: '❄️ **Refrigerated Vehicles**: Temperature & humidity monitoring with instant deviation alerts. 24/7 logs and compliance reports.\n\n[Request a consultation](#contact)',
-      products: 'We offer 6 smart devices:\n\n📡 GPS Tracker\n📹 Dashcam\n🌡️ Temp & Humidity Sensor\n⛽ Fuel Sensor\n🔧 OBD Device\n📶 M2M SIM Card\n\nAll with 2-year warranty and free installation on fleet plans.\n\n[Browse products](#products)',
+      products: 'We offer 6 smart devices:\n\n📡 GPS Tracker\n📹 Dashcam\n🌡️ Temp & Humidity Sensor\n⛽ Fuel Sensor\n🔧 OBD Device\n📶 M2M SIM Card\n\nAll with 2-year warranty and free installation on fleet plans.\n\n[Browse services](#services)',
       gps: '📡 **GPS Tracker** — Best seller! Real-time tracking via GPS/GLONASS and 4G, backup battery, IP67 waterproof.\n\n[Request a quote](#contact)',
       dashcam: '📹 **Dashcam** — Full HD/4K recording with night vision and collision detection. Auto cloud upload.\n\n[Order now](#contact)',
       tempSensor: '🌡️ **Temp & Humidity Sensor** — Perfect for cold chain. ±0.5°C accuracy with instant SMS alerts.\n\n[Order now](#contact)',

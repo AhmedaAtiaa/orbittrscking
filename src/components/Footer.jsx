@@ -21,7 +21,7 @@ export default function Footer() {
     ],
     company: [
       { labelKey: 'footer.links.about', href: '#/about' },
-      { labelKey: 'footer.links.team', href: '#/about' },
+      { labelKey: 'footer.links.team', href: '#/team' },
       { labelKey: 'footer.links.careers', href: '#/careers' },
     ],
     support: [

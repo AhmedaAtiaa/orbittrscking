@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react'
 
 /**
- * @returns {{ name: 'home' | 'privacy' | 'terms' | 'about' | 'careers' | 'service', serviceId?: string }}
+ * @returns {{ name: 'home' | 'privacy' | 'terms' | 'about' | 'careers' | 'team' | 'service', serviceId?: string }}
  */
 function parseRoute(hash) {
   if (hash.startsWith('#/privacy')) return { name: 'privacy' }
   if (hash.startsWith('#/terms')) return { name: 'terms' }
   if (hash.startsWith('#/about')) return { name: 'about' }
   if (hash.startsWith('#/careers')) return { name: 'careers' }
+  if (hash.startsWith('#/team')) return { name: 'team' }
   const serviceMatch = hash.match(/^#\/service\/([a-zA-Z0-9_-]+)/)
   if (serviceMatch) return { name: 'service', serviceId: serviceMatch[1] }
   return { name: 'home' }

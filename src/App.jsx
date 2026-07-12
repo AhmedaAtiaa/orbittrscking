@@ -11,7 +11,6 @@ import { useHashRoute } from './hooks/useHashRoute'
 
 const ImageMarquee = lazy(() => import('./components/ImageMarquee'))
 const Services = lazy(() => import('./components/Services'))
-const Products = lazy(() => import('./components/Products'))
 const Showcase = lazy(() => import('./components/Showcase'))
 const Gallery = lazy(() => import('./components/Gallery'))
 const Features = lazy(() => import('./components/Features'))
@@ -27,6 +26,7 @@ const FloatingOrbs = lazy(() => import('./components/effects/FloatingOrbs'))
 const LegalPage = lazy(() => import('./pages/LegalPage'))
 const AboutPage = lazy(() => import('./pages/AboutPage'))
 const CareersPage = lazy(() => import('./pages/CareersPage'))
+const TeamPage = lazy(() => import('./pages/TeamPage'))
 const ServiceDetailPage = lazy(() => import('./pages/ServiceDetailPage'))
 
 function SectionFallback() {
@@ -41,8 +41,9 @@ function App() {
   const isLegal = route.name === 'privacy' || route.name === 'terms'
   const isAbout = route.name === 'about'
   const isCareers = route.name === 'careers'
+  const isTeam = route.name === 'team'
   const isService = route.name === 'service'
-  const isSubpage = isLegal || isAbout || isCareers || isService
+  const isSubpage = isLegal || isAbout || isCareers || isTeam || isService
 
   useEffect(() => {
     const timer = setTimeout(() => setLoaded(true), lite ? 600 : 900)
@@ -106,6 +107,12 @@ function App() {
             <CareersPage />
           </Suspense>
         </main>
+      ) : isTeam ? (
+        <main>
+          <Suspense fallback={<SectionFallback />}>
+            <TeamPage />
+          </Suspense>
+        </main>
       ) : isService ? (
         <main>
           <Suspense fallback={<SectionFallback />}>
@@ -120,7 +127,6 @@ function App() {
             {!lite && <SectionDivider />}
             <Services />
             {!lite && <SectionDivider flip />}
-            <Products />
             <Showcase />
             <Gallery />
             {!lite && <SectionDivider />}
