@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- أبعاد المدار — كوكب أبيض + مدار برتقالي، خلفية شفافة -->
+
+  <!-- المدار خلف الكوكب -->
+  <ellipse
+    cx="50" cy="50" rx="44" ry="15"
+    transform="rotate(-38 50 50)"
+    stroke="#ff6600"
+    stroke-width="5.5"
+    fill="none"
+    stroke-linecap="round"
+    stroke-dasharray="75 205"
+    stroke-dashoffset="52"
+  />
+
+  <!-- الحلقة البيضاء (دونات) -->
+  <path
+    fill="#ffffff"
+    fill-rule="evenodd"
+    d="M50 50m-24 0a24 24 0 1 0 48 0a24 24 0 1 0-48 0
+       M50 50m-13.5 0a13.5 13.5 0 1 0 27 0a13.5 13.5 0 1 0-27 0"
+  />
+
+  <!-- النقطة المركزية -->
+  <circle cx="50" cy="50" r="5.5" fill="#ffffff"/>
+
+  <!-- المدار أمام الكوكب -->
+  <ellipse
+    cx="50" cy="50" rx="44" ry="15"
+    transform="rotate(-38 50 50)"
+    stroke="#ff6600"
+    stroke-width="5.5"
+    fill="none"
+    stroke-linecap="round"
+    stroke-dasharray="80 200"
+    stroke-dashoffset="-80"
+  />
+</svg>

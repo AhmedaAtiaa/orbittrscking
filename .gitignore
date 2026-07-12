@@ -1,0 +1,15 @@
+node_modules
+dist
+.DS_Store
+*.local
+.env
+.env.*
+
+# ملفات عمل مؤقتة وليست جزء من الموقع
+assets/
+*.pptx
+pptx_*.json
+pptx_*.txt
+analyze_pptx.py
+build_orbit_16slides.py
+replace_pptx_images.py
