@@ -14,10 +14,10 @@ export default function Footer() {
 
   const footerSections = {
     services: [
-      { labelKey: 'footer.links.gpsTracking', href: '#services' },
-      { labelKey: 'footer.links.schoolTransport', href: '#services' },
-      { labelKey: 'footer.links.tempMonitoring', href: '#services' },
-      { labelKey: 'footer.links.dashcamAi', href: '#services' },
+      { labelKey: 'footer.links.gpsTracking', href: '#/service/gps' },
+      { labelKey: 'footer.links.schoolTransport', href: '#/service/school' },
+      { labelKey: 'footer.links.tempMonitoring', href: '#/service/temp' },
+      { labelKey: 'footer.links.dashcamAi', href: '#/service/dashcamAi' },
     ],
     company: [
       { labelKey: 'footer.links.about', href: '#/about' },
