@@ -29,6 +29,7 @@ export default function Contact() {
   const contactInfo = [
     { icon: Phone, label: t('contact.phone'), value: COMPANY.phoneDisplay || COMPANY.phone, href: `tel:${COMPANY.phoneTel || COMPANY.phone.replace(/\s/g, '')}`, ltr: true },
     { icon: Mail, label: t('contact.email'), value: COMPANY.email, href: `mailto:${COMPANY.email}`, ltr: true },
+    { icon: Mail, label: t('contact.emailCare'), value: COMPANY.emailCare, href: `mailto:${COMPANY.emailCare}`, ltr: true },
     { icon: MapPin, label: t('contact.address'), value: t('company.address'), href: '#' },
     { icon: Clock, label: t('contact.hours'), value: t('company.hours'), href: '#' },
   ]

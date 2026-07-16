@@ -94,6 +94,14 @@ export default function LegalPage({ type = 'privacy' }) {
               </a>
               <span className="hidden sm:inline text-slate-600">·</span>
               <a
+                href={`mailto:${COMPANY.emailCare}`}
+                className="text-brand-400 hover:text-brand-300 transition-colors"
+                dir="ltr"
+              >
+                {COMPANY.emailCare}
+              </a>
+              <span className="hidden sm:inline text-slate-600">·</span>
+              <a
                 href={`tel:${COMPANY.phoneTel}`}
                 className="text-brand-400 hover:text-brand-300 transition-colors"
                 dir="ltr"

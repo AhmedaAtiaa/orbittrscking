@@ -92,6 +92,7 @@ export const heroVideo = {
 
 export const COMPANY = {
   email: 'info@orbitdimension.com',
+  emailCare: 'customercare@orbitdimension.com',
   phone: '+966541294487',
   // مسافات غير قابلة للكسر + علامة LTR لمنع عكس الرقم في الواجهة العربية
   phoneDisplay: '\u200E+966\u00A054\u00A0129\u00A04487',
@@ -100,5 +101,5 @@ export const COMPANY = {
   whatsappUrl: 'https://wa.me/966541294487',
   linkedin: 'https://www.linkedin.com/company/orbit-tracking1',
   facebook: 'https://www.facebook.com/share/1CjWyY9Hak/',
-  address: 'الرياض - المملكة العربية السعودية',
+  address: 'الرياض - حي المرسلات، طريق أبو بكر الصديق',
 }

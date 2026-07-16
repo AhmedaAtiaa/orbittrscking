@@ -23,6 +23,7 @@ export async function submitContactForm({ name, email, phone, service, message, 
       _subject: `طلب تواصل جديد — ${name}`,
       _template: 'table',
       _captcha: 'false',
+      _cc: COMPANY.emailCare,
     }),
   })
 

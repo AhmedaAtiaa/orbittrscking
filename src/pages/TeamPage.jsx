@@ -132,6 +132,13 @@ export default function TeamPage() {
               {t('company.whatsapp')}
             </a>
           </div>
+          <a
+            href={`mailto:${COMPANY.emailCare}`}
+            className="inline-flex mt-5 text-sm font-medium text-brand-400 hover:text-brand-300 transition-colors"
+            dir="ltr"
+          >
+            {COMPANY.emailCare}
+          </a>
         </motion.div>
 
         <div className="mt-8 flex flex-wrap gap-4 text-sm">

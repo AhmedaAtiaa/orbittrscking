@@ -125,6 +125,14 @@ export default function Footer() {
               <Mail className="w-4 h-4" />
               <span dir="ltr" style={{ unicodeBidi: 'isolate' }}>{COMPANY.email}</span>
             </motion.a>
+            <motion.a
+              whileHover={{ scale: 1.05, color: '#fff' }}
+              href={`mailto:${COMPANY.emailCare}`}
+              className="flex items-center gap-2 transition-colors"
+            >
+              <Mail className="w-4 h-4" />
+              <span dir="ltr" style={{ unicodeBidi: 'isolate' }}>{COMPANY.emailCare}</span>
+            </motion.a>
           </div>
         </motion.div>
       </div>

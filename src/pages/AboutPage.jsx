@@ -180,6 +180,9 @@ export default function AboutPage() {
             <a href={`mailto:${COMPANY.email}`} className="text-brand-400 hover:text-brand-300" dir="ltr">
               {COMPANY.email}
             </a>
+            <a href={`mailto:${COMPANY.emailCare}`} className="text-brand-400 hover:text-brand-300" dir="ltr">
+              {COMPANY.emailCare}
+            </a>
             <a href={`tel:${COMPANY.phoneTel}`} className="text-brand-400 hover:text-brand-300" dir="ltr">
               {COMPANY.phoneDisplay || COMPANY.phone}
             </a>
