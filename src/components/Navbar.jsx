@@ -7,7 +7,6 @@ import Logo from './ui/Logo'
 
 const navLinkKeys = [
   { href: '#services', key: 'nav.services' },
-  { href: '#gallery', key: 'nav.gallery' },
   { href: '#features', key: 'nav.features' },
   { href: '#partners', key: 'nav.partners' },
   { href: '#contact', key: 'nav.contact' },

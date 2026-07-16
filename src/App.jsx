@@ -12,7 +12,6 @@ import { useHashRoute } from './hooks/useHashRoute'
 const ImageMarquee = lazy(() => import('./components/ImageMarquee'))
 const Services = lazy(() => import('./components/Services'))
 const Showcase = lazy(() => import('./components/Showcase'))
-const Gallery = lazy(() => import('./components/Gallery'))
 const Features = lazy(() => import('./components/Features'))
 const Stats = lazy(() => import('./components/Stats'))
 const Partners = lazy(() => import('./components/Partners'))
@@ -128,7 +127,6 @@ function App() {
             <Services />
             {!lite && <SectionDivider flip />}
             <Showcase />
-            <Gallery />
             {!lite && <SectionDivider />}
             <Features />
             <Stats />

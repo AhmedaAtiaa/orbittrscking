@@ -16,7 +16,6 @@ export default {
   },
   nav: {
     services: 'Services',
-    gallery: 'Gallery',
     features: 'Features',
     partners: 'Partners',
     contact: 'Contact',

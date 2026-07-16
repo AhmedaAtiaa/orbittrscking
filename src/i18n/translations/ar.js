@@ -16,7 +16,6 @@ export default {
   },
   nav: {
     services: 'خدماتنا',
-    gallery: 'معرض الأعمال',
     features: 'المميزات',
     partners: 'شركاؤنا',
     contact: 'تواصل معنا',

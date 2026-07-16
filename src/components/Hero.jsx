@@ -107,7 +107,7 @@ export default function Hero() {
                 {t('hero.ctaPrimary')}
                 <Arrow className="w-5 h-5" />
               </MagneticButton>
-              <MagneticButton href="#gallery" strength={0.2} className="btn-outline flex items-center justify-center gap-2 group">
+              <MagneticButton href="#services" strength={0.2} className="btn-outline flex items-center justify-center gap-2 group">
                 <Play className="w-5 h-5 group-hover:text-brand-400 transition-colors" />
                 {t('hero.ctaSecondary')}
               </MagneticButton>
