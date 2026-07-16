@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Phone, Mail, MapPin, Send, Clock } from 'lucide-react'
+import { Phone, Mail, MapPin, Send, Clock, Loader2 } from 'lucide-react'
 import { COMPANY, images } from '../data/images'
 import { useLanguage } from '../i18n/LanguageContext'
 import SafeImage from './ui/SafeImage'
+import { submitContactForm } from '../utils/submitContactForm'
 
 const serviceOptions = [
   { value: 'gps', key: 'gps' },
@@ -21,8 +22,8 @@ const serviceOptions = [
 
 export default function Contact() {
   const { t, isRtl } = useLanguage()
-  const [form, setForm] = useState({ name: '', email: '', phone: '', service: '', message: '' })
-  const [submitted, setSubmitted] = useState(false)
+  const [form, setForm] = useState({ name: '', email: '', phone: '', service: '', message: '', website: '' })
+  const [status, setStatus] = useState('idle') // idle | sending | success | error
   const companyName = t('company.name')
 
   const contactInfo = [
@@ -32,14 +33,36 @@ export default function Contact() {
     { icon: Clock, label: t('contact.hours'), value: t('company.hours'), href: '#' },
   ]
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    setSubmitted(true)
-    setTimeout(() => setSubmitted(false), 3000)
+    if (form.website) return
+    if (status === 'sending') return
+
+    setStatus('sending')
+    try {
+      const serviceLabel = form.service
+        ? t(`contact.form.options.${form.service}`)
+        : ''
+      await submitContactForm({
+        name: form.name.trim(),
+        email: form.email.trim(),
+        phone: form.phone.trim(),
+        service: form.service,
+        serviceLabel,
+        message: form.message.trim(),
+      })
+      setStatus('success')
+      setForm({ name: '', email: '', phone: '', service: '', message: '', website: '' })
+      setTimeout(() => setStatus('idle'), 5000)
+    } catch {
+      setStatus('error')
+      setTimeout(() => setStatus('idle'), 5000)
+    }
   }
 
   const slideFrom = isRtl ? 30 : -30
   const hoverShift = isRtl ? -5 : 5
+  const sending = status === 'sending'
 
   return (
     <section id="contact" className="section-padding relative overflow-hidden">
@@ -106,15 +129,27 @@ export default function Contact() {
             onSubmit={handleSubmit}
             className="lg:col-span-3 glass-card space-y-5"
           >
+            <input
+              type="text"
+              name="website"
+              value={form.website}
+              onChange={(e) => setForm({ ...form, website: e.target.value })}
+              className="hidden"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+            />
+
             <div className="grid sm:grid-cols-2 gap-5">
               <div>
                 <label className="block text-sm text-slate-300 mb-2">{t('contact.form.name')}</label>
                 <input
                   type="text"
                   required
+                  disabled={sending}
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 transition-colors"
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 transition-colors disabled:opacity-60"
                   placeholder={t('contact.form.namePlaceholder')}
                 />
               </div>
@@ -123,9 +158,10 @@ export default function Contact() {
                 <input
                   type="email"
                   required
+                  disabled={sending}
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 transition-colors"
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 transition-colors disabled:opacity-60"
                   placeholder="email@example.com"
                 />
               </div>
@@ -136,18 +172,20 @@ export default function Contact() {
                 <label className="block text-sm text-slate-300 mb-2">{t('contact.form.phone')}</label>
                 <input
                   type="tel"
+                  disabled={sending}
                   value={form.phone}
                   onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 transition-colors"
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 transition-colors disabled:opacity-60"
                   placeholder={t('contact.form.phonePlaceholder')}
                 />
               </div>
               <div>
                 <label className="block text-sm text-slate-300 mb-2">{t('contact.form.service')}</label>
                 <select
+                  disabled={sending}
                   value={form.service}
                   onChange={(e) => setForm({ ...form, service: e.target.value })}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 transition-colors"
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 transition-colors disabled:opacity-60"
                 >
                   <option value="" className="bg-slate-900">{t('contact.form.servicePlaceholder')}</option>
                   {serviceOptions.map((opt) => (
@@ -163,20 +201,33 @@ export default function Contact() {
               <label className="block text-sm text-slate-300 mb-2">{t('contact.form.message')}</label>
               <textarea
                 rows={4}
+                disabled={sending}
                 value={form.message}
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 transition-colors resize-none"
+                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 transition-colors resize-none disabled:opacity-60"
                 placeholder={t('contact.form.messagePlaceholder')}
               />
             </div>
 
+            {status === 'error' && (
+              <p className="text-sm text-red-400">{t('contact.form.error')}</p>
+            )}
+
             <motion.button
               type="submit"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="btn-primary w-full flex items-center justify-center gap-2"
+              disabled={sending}
+              whileHover={sending ? undefined : { scale: 1.02 }}
+              whileTap={sending ? undefined : { scale: 0.98 }}
+              className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-wait"
             >
-              {submitted ? t('contact.form.success') : (
+              {status === 'success' ? (
+                t('contact.form.success')
+              ) : sending ? (
+                <>
+                  {t('contact.form.sending')}
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                </>
+              ) : (
                 <>
                   {t('contact.form.submit')}
                   <Send className="w-5 h-5" />

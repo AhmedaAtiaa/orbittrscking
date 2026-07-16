@@ -91,7 +91,7 @@ export const heroVideo = {
 }
 
 export const COMPANY = {
-  email: 'info@orbittracking.com',
+  email: 'info@orbitdimension.com',
   phone: '+966541294487',
   // مسافات غير قابلة للكسر + علامة LTR لمنع عكس الرقم في الواجهة العربية
   phoneDisplay: '\u200E+966\u00A054\u00A0129\u00A04487',
