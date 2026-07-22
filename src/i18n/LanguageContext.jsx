@@ -1,6 +1,8 @@
 import { createContext, useContext, useEffect, useState, useCallback } from 'react'
 import ar from './translations/ar'
 import en from './translations/en'
+import { DEFAULT_LOCALE } from '../seo/siteConfig'
+import { parsePathname } from '../utils/paths'
 
 const translations = { ar, en }
 const STORAGE_KEY = 'orbit-tracking-lang'
@@ -11,13 +13,15 @@ function getNested(obj, path) {
   return path.split('.').reduce((acc, key) => acc?.[key], obj)
 }
 
+function initialLocale() {
+  if (typeof window === 'undefined') return DEFAULT_LOCALE
+  const fromPath = parsePathname(window.location.pathname).locale
+  if (fromPath) return fromPath
+  return localStorage.getItem(STORAGE_KEY) || DEFAULT_LOCALE
+}
+
 export function LanguageProvider({ children }) {
-  const [locale, setLocaleState] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem(STORAGE_KEY) || 'ar'
-    }
-    return 'ar'
-  })
+  const [locale, setLocaleState] = useState(initialLocale)
 
   const isRtl = locale === 'ar'
 
@@ -47,9 +51,6 @@ export function LanguageProvider({ children }) {
     const root = document.documentElement
     root.lang = locale
     root.dir = isRtl ? 'rtl' : 'ltr'
-    document.title = translations[locale].meta.title
-    const meta = document.querySelector('meta[name="description"]')
-    if (meta) meta.content = translations[locale].meta.description
   }, [locale, isRtl])
 
   return (

@@ -1,41 +1,41 @@
-import { useEffect } from 'react'
 import { motion } from 'framer-motion'
 import {
   ArrowLeft, ArrowRight, Briefcase, MapPin, Clock, Send, CheckCircle2,
 } from 'lucide-react'
 import { useLanguage } from '../i18n/LanguageContext'
 import { COMPANY } from '../data/images'
+import AppLink from '../components/AppLink'
+import Breadcrumbs from '../components/seo/Breadcrumbs'
+import { buildBreadcrumbs } from '../seo/pageMeta'
+import { homePath, aboutPath, contactHash } from '../utils/paths'
 
 export default function CareersPage() {
-  const { t, isRtl } = useLanguage()
+  const { t, isRtl, locale } = useLanguage()
   const Arrow = isRtl ? ArrowLeft : ArrowRight
   const title = t('careersPage.title')
   const jobs = t('careersPage.jobs') || []
   const benefits = t('careersPage.benefits') || []
   const steps = t('careersPage.steps') || []
-
-  useEffect(() => {
-    const prev = document.title
-    document.title = `${title} | ${t('company.name')}`
-    return () => {
-      document.title = prev
-    }
-  }, [title, t])
+  const crumbs = buildBreadcrumbs({ name: 'careers' }, locale)
 
   const applyHref = `mailto:${COMPANY.email}?subject=${encodeURIComponent(t('careersPage.emailSubject'))}`
 
   return (
     <section className="relative min-h-screen pt-28 pb-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto">
-        <motion.a
-          href="#/"
+        <Breadcrumbs items={crumbs} />
+        <motion.div
           initial={{ opacity: 0, x: isRtl ? 12 : -12 }}
           animate={{ opacity: 1, x: 0 }}
-          className="inline-flex items-center gap-2 text-sm text-slate-300 hover:text-brand-400 transition-colors mb-8"
         >
-          <Arrow className={`w-4 h-4 ${isRtl ? '' : 'rotate-180'}`} />
-          {t('careersPage.back')}
-        </motion.a>
+          <AppLink
+            href={homePath(locale)}
+            className="inline-flex items-center gap-2 text-sm text-slate-300 hover:text-brand-400 transition-colors mb-8"
+          >
+            <Arrow className={`w-4 h-4 ${isRtl ? '' : 'rotate-180'}`} />
+            {t('careersPage.back')}
+          </AppLink>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -176,12 +176,12 @@ export default function CareersPage() {
         </div>
 
         <div className="flex flex-wrap gap-4 text-sm">
-          <a href="#/about" className="text-slate-400 hover:text-brand-400 transition-colors underline underline-offset-4">
+          <AppLink href={aboutPath(locale)} className="text-slate-400 hover:text-brand-400 transition-colors underline underline-offset-4">
             {t('footer.links.about')}
-          </a>
-          <a href="#contact" className="text-slate-400 hover:text-brand-400 transition-colors underline underline-offset-4">
+          </AppLink>
+          <AppLink href={contactHash(locale)} className="text-slate-400 hover:text-brand-400 transition-colors underline underline-offset-4">
             {t('nav.contact')}
-          </a>
+          </AppLink>
         </div>
       </div>
     </section>

@@ -2,10 +2,13 @@ import { motion } from 'framer-motion'
 import { ArrowRight, ArrowLeft, Shield, Scale } from 'lucide-react'
 import { useLanguage } from '../i18n/LanguageContext'
 import { COMPANY } from '../data/images'
-import { useEffect } from 'react'
+import AppLink from '../components/AppLink'
+import Breadcrumbs from '../components/seo/Breadcrumbs'
+import { buildBreadcrumbs } from '../seo/pageMeta'
+import { homePath, privacyPath, termsPath, contactHash } from '../utils/paths'
 
 export default function LegalPage({ type = 'privacy' }) {
-  const { t, isRtl } = useLanguage()
+  const { t, isRtl, locale } = useLanguage()
   const Arrow = isRtl ? ArrowLeft : ArrowRight
   const isPrivacy = type === 'privacy'
   const base = isPrivacy ? 'privacyPage' : 'termsPage'
@@ -16,27 +19,24 @@ export default function LegalPage({ type = 'privacy' }) {
   const intro = t(`${base}.intro`)
   const sections = t(`${base}.sections`) || []
   const contactNote = t(`${base}.contactNote`)
-
-  useEffect(() => {
-    const prev = document.title
-    document.title = `${title} | ${t('company.name')}`
-    return () => {
-      document.title = prev
-    }
-  }, [title, t])
+  const crumbs = buildBreadcrumbs({ name: isPrivacy ? 'privacy' : 'terms' }, locale)
 
   return (
     <section className="relative min-h-screen pt-28 pb-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
-        <motion.a
-          href="#/"
+        <Breadcrumbs items={crumbs} />
+        <motion.div
           initial={{ opacity: 0, x: isRtl ? 12 : -12 }}
           animate={{ opacity: 1, x: 0 }}
-          className="inline-flex items-center gap-2 text-sm text-slate-300 hover:text-brand-400 transition-colors mb-8"
         >
-          <Arrow className={`w-4 h-4 ${isRtl ? '' : 'rotate-180'}`} />
-          {t('privacyPage.back')}
-        </motion.a>
+          <AppLink
+            href={homePath(locale)}
+            className="inline-flex items-center gap-2 text-sm text-slate-300 hover:text-brand-400 transition-colors mb-8"
+          >
+            <Arrow className={`w-4 h-4 ${isRtl ? '' : 'rotate-180'}`} />
+            {t('privacyPage.back')}
+          </AppLink>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -113,17 +113,17 @@ export default function LegalPage({ type = 'privacy' }) {
 
           <div className="mt-8 flex flex-wrap gap-4 text-sm">
             {isPrivacy ? (
-              <a href="#/terms" className="text-slate-400 hover:text-brand-400 transition-colors underline underline-offset-4">
+              <AppLink href={termsPath(locale)} className="text-slate-400 hover:text-brand-400 transition-colors underline underline-offset-4">
                 {t('footer.links.terms')}
-              </a>
+              </AppLink>
             ) : (
-              <a href="#/privacy" className="text-slate-400 hover:text-brand-400 transition-colors underline underline-offset-4">
+              <AppLink href={privacyPath(locale)} className="text-slate-400 hover:text-brand-400 transition-colors underline underline-offset-4">
                 {t('footer.links.privacy')}
-              </a>
+              </AppLink>
             )}
-            <a href="#contact" className="text-slate-400 hover:text-brand-400 transition-colors underline underline-offset-4">
+            <AppLink href={contactHash(locale)} className="text-slate-400 hover:text-brand-400 transition-colors underline underline-offset-4">
               {t('nav.contact')}
-            </a>
+            </AppLink>
           </div>
         </motion.div>
       </div>

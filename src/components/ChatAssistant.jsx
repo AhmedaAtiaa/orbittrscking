@@ -4,6 +4,7 @@ import { MessageCircle, X, Send, Bot, User, Sparkles, Minimize2 } from 'lucide-r
 import { useLanguage } from '../i18n/LanguageContext'
 import { getChatResponse, getQuickReplies } from '../utils/chatAssistant'
 import Logo from './ui/Logo'
+import AppLink from './AppLink'
 
 function TypingIndicator() {
   return (
@@ -30,19 +31,30 @@ function formatBold(text) {
   })
 }
 
-function renderMessage(text) {
+function renderMessage(text, locale = 'ar') {
   const parts = text.split(/(\[.*?\]\(.*?\))/g)
   return parts.map((part, i) => {
     const linkMatch = part.match(/\[(.*?)\]\((.*?)\)/)
     if (linkMatch) {
+      let href = linkMatch[2]
+      const label = linkMatch[1]
+      const className = 'text-brand-300 underline underline-offset-2 hover:text-brand-200 transition-colors'
+      if (href === '/#contact') {
+        href = locale === 'en' ? '/en#contact' : '/#contact'
+      } else if (href === '/#services') {
+        href = locale === 'en' ? '/en#services' : '/#services'
+      }
+      if (href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:')) {
+        return (
+          <a key={i} href={href} target="_blank" rel="noopener noreferrer" className={className}>
+            {label}
+          </a>
+        )
+      }
       return (
-        <a
-          key={i}
-          href={linkMatch[2]}
-          className="text-brand-300 underline underline-offset-2 hover:text-brand-200 transition-colors"
-        >
-          {linkMatch[1]}
-        </a>
+        <AppLink key={i} href={href} className={className}>
+          {label}
+        </AppLink>
       )
     }
     return part.split('\n').map((line, j, arr) => (
@@ -55,7 +67,7 @@ function renderMessage(text) {
 }
 
 export default function ChatAssistant() {
-  const { t, isRtl } = useLanguage()
+  const { t, isRtl, locale } = useLanguage()
   const [open, setOpen] = useState(false)
   const [input, setInput] = useState('')
   const [typing, setTyping] = useState(false)
@@ -171,7 +183,7 @@ export default function ChatAssistant() {
                         : 'bg-brand-600/80 text-white rounded-se-sm'
                     }`}
                   >
-                    {renderMessage(msg.text)}
+                    {renderMessage(msg.text, locale)}
                   </div>
                 </motion.div>
               ))}

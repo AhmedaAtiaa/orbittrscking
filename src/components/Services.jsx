@@ -24,7 +24,7 @@ const serviceConfig = [
 ]
 
 export default function Services() {
-  const { t, isRtl } = useLanguage()
+  const { t, isRtl, locale } = useLanguage()
   const Arrow = isRtl ? ArrowLeft : ArrowRight
 
   return (
@@ -79,7 +79,7 @@ export default function Services() {
                   <article className="group relative overflow-hidden rounded-3xl bg-slate-900/50 border border-white/10 hover:border-brand-500/30 transition-colors duration-300 h-full border-beam flex flex-col">
                     <button
                       type="button"
-                      onClick={() => goToService(service.id)}
+                      onClick={() => goToService(service.id, locale)}
                       className={`relative h-48 overflow-hidden shrink-0 w-full text-start ${service.cold ? 'ring-1 ring-cyan-400/30' : ''}`}
                       aria-label={title}
                     >
@@ -122,7 +122,7 @@ export default function Services() {
                       )}
                       <button
                         type="button"
-                        onClick={() => goToService(service.id)}
+                        onClick={() => goToService(service.id, locale)}
                         className="inline-flex items-center gap-2 text-brand-400 hover:text-brand-300 font-medium text-sm group/link mt-auto"
                       >
                         {t('services.learnMore')}

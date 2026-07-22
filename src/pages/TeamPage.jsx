@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { motion } from 'framer-motion'
 import {
   ArrowLeft, ArrowRight, Users, Wrench, Headphones, LineChart, Settings2,
@@ -6,37 +5,38 @@ import {
 } from 'lucide-react'
 import { useLanguage } from '../i18n/LanguageContext'
 import { COMPANY } from '../data/images'
+import AppLink from '../components/AppLink'
+import Breadcrumbs from '../components/seo/Breadcrumbs'
+import { buildBreadcrumbs } from '../seo/pageMeta'
+import { homePath, contactHash, careersPath, aboutPath } from '../utils/paths'
 
 const deptIcons = [Wrench, Headphones, LineChart, Settings2]
 const valueIcons = [ShieldCheck, Zap, HeartHandshake]
 
 export default function TeamPage() {
-  const { t, isRtl } = useLanguage()
+  const { t, isRtl, locale } = useLanguage()
   const Arrow = isRtl ? ArrowLeft : ArrowRight
   const title = t('teamPage.title')
   const departments = t('teamPage.departments') || []
   const values = t('teamPage.values') || []
-
-  useEffect(() => {
-    const prev = document.title
-    document.title = `${title} | ${t('company.name')}`
-    return () => {
-      document.title = prev
-    }
-  }, [title, t])
+  const crumbs = buildBreadcrumbs({ name: 'team' }, locale)
 
   return (
     <section className="relative min-h-screen pt-28 pb-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto">
-        <motion.a
-          href="#/"
+        <Breadcrumbs items={crumbs} />
+        <motion.div
           initial={{ opacity: 0, x: isRtl ? 12 : -12 }}
           animate={{ opacity: 1, x: 0 }}
-          className="inline-flex items-center gap-2 text-sm text-slate-300 hover:text-brand-400 transition-colors mb-8"
         >
-          <Arrow className={`w-4 h-4 ${isRtl ? '' : 'rotate-180'}`} />
-          {t('teamPage.back')}
-        </motion.a>
+          <AppLink
+            href={homePath(locale)}
+            className="inline-flex items-center gap-2 text-sm text-slate-300 hover:text-brand-400 transition-colors mb-8"
+          >
+            <Arrow className={`w-4 h-4 ${isRtl ? '' : 'rotate-180'}`} />
+            {t('teamPage.back')}
+          </AppLink>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -117,12 +117,12 @@ export default function TeamPage() {
             {t('teamPage.ctaBody')}
           </p>
           <div className="flex flex-wrap gap-3">
-            <a href="#contact" className="btn-primary text-sm !py-3 !px-6">
+            <AppLink href={contactHash(locale)} className="btn-primary text-sm !py-3 !px-6">
               {t('teamPage.ctaContact')}
-            </a>
-            <a href="#/careers" className="btn-outline text-sm !py-3 !px-6">
+            </AppLink>
+            <AppLink href={careersPath(locale)} className="btn-outline text-sm !py-3 !px-6">
               {t('teamPage.ctaCareers')}
-            </a>
+            </AppLink>
             <a
               href={COMPANY.whatsappUrl}
               target="_blank"
@@ -142,12 +142,12 @@ export default function TeamPage() {
         </motion.div>
 
         <div className="mt-8 flex flex-wrap gap-4 text-sm">
-          <a href="#/about" className="text-slate-400 hover:text-brand-400 transition-colors underline underline-offset-4">
+          <AppLink href={aboutPath(locale)} className="text-slate-400 hover:text-brand-400 transition-colors underline underline-offset-4">
             {t('footer.links.about')}
-          </a>
-          <a href="#/careers" className="text-slate-400 hover:text-brand-400 transition-colors underline underline-offset-4">
+          </AppLink>
+          <AppLink href={careersPath(locale)} className="text-slate-400 hover:text-brand-400 transition-colors underline underline-offset-4">
             {t('footer.links.careers')}
-          </a>
+          </AppLink>
         </div>
       </div>
     </section>

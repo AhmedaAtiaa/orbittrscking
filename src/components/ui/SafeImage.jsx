@@ -3,8 +3,16 @@ import { ImageOff } from 'lucide-react'
 
 const PLACEHOLDER = '/images/placeholder.svg'
 
+/** Prefer sibling .webp when available (generated at build / optimize script) */
+function webpSrc(src) {
+  if (!src || typeof src !== 'string') return null
+  if (/\.webp$/i.test(src) || /\.svg$/i.test(src) || src.startsWith('data:')) return null
+  if (!/\.(jpe?g|png)$/i.test(src)) return null
+  return src.replace(/\.(jpe?g|png)$/i, '.webp')
+}
+
 /**
- * صورة مع fallback تلقائي — تحميل كسول وdecoding غير متزامن
+ * صورة مع fallback — lazy loading، decoding async، ودعم WebP عبر <picture>
  */
 export default function SafeImage({
   src,
@@ -15,6 +23,7 @@ export default function SafeImage({
   fetchPriority,
   width,
   height,
+  sizes,
   ...props
 }) {
   const [current, setCurrent] = useState(src)
@@ -27,31 +36,44 @@ export default function SafeImage({
     }
     if (current !== PLACEHOLDER) {
       setCurrent(PLACEHOLDER)
-      setErrored(true)
     }
+    setErrored(true)
   }
 
   if (errored && current === PLACEHOLDER) {
     return (
-      <div className={`flex items-center justify-center bg-slate-800 text-slate-400 ${className}`} {...props}>
-        <ImageOff className="w-8 h-8 opacity-50" />
-        <span className="sr-only">{alt}</span>
+      <div className={`flex items-center justify-center bg-slate-800 text-slate-400 ${className}`} role="img" aria-label={alt || 'Image unavailable'} {...props}>
+        <ImageOff className="w-8 h-8 opacity-50" aria-hidden />
+        <span className="sr-only">{alt || 'Image unavailable'}</span>
       </div>
     )
   }
 
-  return (
+  const webp = webpSrc(current)
+  const img = (
     <img
       src={current}
-      alt={alt}
+      alt={alt || ''}
       className={className}
       loading={loading}
       decoding="async"
-      fetchPriority={fetchPriority}
+      {...(fetchPriority != null ? { fetchpriority: fetchPriority } : {})}
       width={width}
       height={height}
+      sizes={sizes}
       onError={handleError}
       {...props}
     />
   )
+
+  if (webp) {
+    return (
+      <picture>
+        <source type="image/webp" srcSet={webp} />
+        {img}
+      </picture>
+    )
+  }
+
+  return img
 }

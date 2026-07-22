@@ -3,6 +3,19 @@ import { Phone, Mail, Linkedin, Facebook } from 'lucide-react'
 import { COMPANY } from '../data/images'
 import { useLanguage } from '../i18n/LanguageContext'
 import Logo from './ui/Logo'
+import AppLink from './AppLink'
+import {
+  homePath,
+  servicePath,
+  aboutPath,
+  teamPath,
+  careersPath,
+  privacyPath,
+  termsPath,
+  faqPath,
+  blogPath,
+  contactHash,
+} from '../utils/paths'
 
 const socials = [
   { icon: Facebook, href: COMPANY.facebook, label: 'Facebook' },
@@ -10,25 +23,26 @@ const socials = [
 ]
 
 export default function Footer() {
-  const { t } = useLanguage()
+  const { t, locale } = useLanguage()
 
   const footerSections = {
     services: [
-      { labelKey: 'footer.links.gpsTracking', href: '#/service/gps' },
-      { labelKey: 'footer.links.schoolTransport', href: '#/service/school' },
-      { labelKey: 'footer.links.tempMonitoring', href: '#/service/temp' },
-      { labelKey: 'footer.links.dashcamAi', href: '#/service/dashcamAi' },
+      { labelKey: 'footer.links.gpsTracking', href: servicePath(locale, 'gps') },
+      { labelKey: 'footer.links.schoolTransport', href: servicePath(locale, 'school') },
+      { labelKey: 'footer.links.tempMonitoring', href: servicePath(locale, 'temp') },
+      { labelKey: 'footer.links.dashcamAi', href: servicePath(locale, 'dashcamAi') },
     ],
     company: [
-      { labelKey: 'footer.links.about', href: '#/about' },
-      { labelKey: 'footer.links.team', href: '#/team' },
-      { labelKey: 'footer.links.careers', href: '#/careers' },
+      { labelKey: 'footer.links.about', href: aboutPath(locale) },
+      { labelKey: 'footer.links.team', href: teamPath(locale) },
+      { labelKey: 'footer.links.careers', href: careersPath(locale) },
+      { labelKey: 'footer.links.blog', href: blogPath(locale) },
     ],
     support: [
-      { labelKey: 'footer.links.help', href: '#contact' },
-      { labelKey: 'footer.links.faq', href: '#contact' },
-      { labelKey: 'footer.links.privacy', href: '#/privacy' },
-      { labelKey: 'footer.links.terms', href: '#/terms' },
+      { labelKey: 'footer.links.help', href: contactHash(locale) },
+      { labelKey: 'footer.links.faq', href: faqPath(locale) },
+      { labelKey: 'footer.links.privacy', href: privacyPath(locale) },
+      { labelKey: 'footer.links.terms', href: termsPath(locale) },
     ],
   }
 
@@ -44,9 +58,9 @@ export default function Footer() {
             viewport={{ once: true }}
             className="lg:col-span-2"
           >
-            <a href="#/" className="mb-6 inline-block group">
+            <AppLink href={homePath(locale)} className="mb-6 inline-block group" aria-label={t('company.name')}>
               <Logo variant="full" size={52} animated showTagline />
-            </a>
+            </AppLink>
             <p className="text-slate-300 leading-relaxed mb-6 max-w-sm">
               {t('company.fullName')} — {t('company.description')}
             </p>
@@ -65,7 +79,7 @@ export default function Footer() {
                   whileHover={{ scale: 1.15, y: -3 }}
                   className="w-10 h-10 rounded-lg glass flex items-center justify-center hover:bg-brand-500/20 hover:border-brand-500/30 transition-all border-beam"
                 >
-                  <social.icon className="w-4 h-4 text-slate-300 hover:text-brand-400" />
+                  <social.icon className="w-4 h-4 text-slate-300 hover:text-brand-400" aria-hidden />
                 </motion.a>
               ))}
             </div>
@@ -79,7 +93,7 @@ export default function Footer() {
               viewport={{ once: true }}
               transition={{ delay: sectionIndex * 0.1 }}
             >
-              <h4 className="font-bold mb-4">{t(`footer.sections.${key}`)}</h4>
+              <h2 className="font-bold mb-4 text-base">{t(`footer.sections.${key}`)}</h2>
               <ul className="space-y-3">
                 {links.map((link, i) => (
                   <motion.li
@@ -89,9 +103,12 @@ export default function Footer() {
                     viewport={{ once: true }}
                     transition={{ delay: sectionIndex * 0.1 + i * 0.05 }}
                   >
-                    <a href={link.href} className="text-slate-300 hover:text-brand-300 transition-colors text-sm inline-block hover:translate-x-1 rtl:hover:-translate-x-1 transform duration-200">
+                    <AppLink
+                      href={link.href}
+                      className="text-slate-300 hover:text-brand-300 transition-colors text-sm inline-block hover:translate-x-1 rtl:hover:-translate-x-1 transform duration-200"
+                    >
                       {t(link.labelKey)}
-                    </a>
+                    </AppLink>
                   </motion.li>
                 ))}
               </ul>
@@ -114,7 +131,7 @@ export default function Footer() {
               href={`tel:${COMPANY.phoneTel || COMPANY.phone.replace(/\s/g, '')}`}
               className="flex items-center gap-2 transition-colors"
             >
-              <Phone className="w-4 h-4" />
+              <Phone className="w-4 h-4" aria-hidden />
               <span dir="ltr" style={{ unicodeBidi: 'isolate' }}>{COMPANY.phoneDisplay || COMPANY.phone}</span>
             </motion.a>
             <motion.a
@@ -122,7 +139,7 @@ export default function Footer() {
               href={`mailto:${COMPANY.email}`}
               className="flex items-center gap-2 transition-colors"
             >
-              <Mail className="w-4 h-4" />
+              <Mail className="w-4 h-4" aria-hidden />
               <span dir="ltr" style={{ unicodeBidi: 'isolate' }}>{COMPANY.email}</span>
             </motion.a>
             <motion.a
@@ -130,7 +147,7 @@ export default function Footer() {
               href={`mailto:${COMPANY.emailCare}`}
               className="flex items-center gap-2 transition-colors"
             >
-              <Mail className="w-4 h-4" />
+              <Mail className="w-4 h-4" aria-hidden />
               <span dir="ltr" style={{ unicodeBidi: 'isolate' }}>{COMPANY.emailCare}</span>
             </motion.a>
           </div>

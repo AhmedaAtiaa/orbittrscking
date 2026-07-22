@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
-import { ArrowLeft, ArrowRight, Play, Shield, Zap, Globe, Satellite, Radio, Snowflake } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Play, Shield, Zap, Globe, Satellite, Snowflake } from 'lucide-react'
 import { images } from '../data/images'
 import { useLanguage } from '../i18n/LanguageContext'
 import { AnimatedWords } from './effects/AnimatedText'
@@ -153,24 +153,6 @@ export default function Hero() {
               badge={<><Snowflake className="w-3.5 h-3.5 text-cyan-300" /> {t('hero.coldTransport')}</>}
             />
 
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1.2, type: 'spring', stiffness: 200 }}
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-40"
-            >
-              <SpotlightCard className="glass-card !p-5 text-center border-beam neon-glow">
-                <motion.div
-                  animate={{ rotate: [0, 5, -5, 0] }}
-                  transition={{ duration: 4, repeat: Infinity }}
-                  className="w-16 h-16 mx-auto mb-2 rounded-full bg-gradient-to-br from-brand-500 to-accent-500 flex items-center justify-center"
-                >
-                  <Radio className="w-8 h-8 text-white" />
-                </motion.div>
-                <p className="text-2xl font-black gradient-text-animated">2,450+</p>
-                <p className="text-xs text-slate-300">{t('hero.connectedVehicles')}</p>
-              </SpotlightCard>
-            </motion.div>
           </div>
         </div>
       </motion.div>

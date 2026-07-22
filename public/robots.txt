@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+Allow: /en
+Allow: /about
+Allow: /services/
+Allow: /blog
+Allow: /faq
+
+Disallow: /api/
+Disallow: /*?*utm_
+Disallow: /*?*fbclid=
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+Sitemap: https://orbitdimension.com/sitemap.xml
+Host: https://orbitdimension.com

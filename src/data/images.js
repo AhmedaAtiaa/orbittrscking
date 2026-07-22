@@ -102,4 +102,7 @@ export const COMPANY = {
   linkedin: 'https://www.linkedin.com/company/orbit-tracking1',
   facebook: 'https://www.facebook.com/share/1CjWyY9Hak/',
   address: 'الرياض - حي المرسلات، طريق أبو بكر الصديق',
+  mapsUrl:
+    'https://www.google.com/maps/search/?api=1&query=' +
+    encodeURIComponent('الرياض حي المرسلات طريق أبو بكر الصديق'),
 }

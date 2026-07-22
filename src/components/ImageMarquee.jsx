@@ -4,7 +4,7 @@ import SafeImage from './ui/SafeImage'
 import { usePerfMode } from '../utils/perf'
 import { goToService } from '../utils/goToService'
 
-function MarqueeRow({ items, reverse = false, speed = 40, altLabel }) {
+function MarqueeRow({ items, reverse = false, speed = 40, altLabel, locale }) {
   const doubled = [...items, ...items]
 
   return (
@@ -17,7 +17,7 @@ function MarqueeRow({ items, reverse = false, speed = 40, altLabel }) {
           <button
             type="button"
             key={i}
-            onClick={() => goToService(item.serviceId)}
+            onClick={() => goToService(item.serviceId, locale)}
             className="relative w-56 sm:w-72 h-36 sm:h-44 rounded-2xl overflow-hidden shrink-0 border border-white/10 text-start cursor-pointer group"
           >
             <SafeImage
@@ -36,7 +36,7 @@ function MarqueeRow({ items, reverse = false, speed = 40, altLabel }) {
 }
 
 export default function ImageMarquee() {
-  const { t } = useLanguage()
+  const { t, locale } = useLanguage()
   const { lite } = usePerfMode()
   const mid = Math.ceil(marqueeItems.length / 2)
   const row1 = marqueeItems.slice(0, mid)
@@ -47,8 +47,8 @@ export default function ImageMarquee() {
     <section className="py-8 sm:py-10 overflow-hidden border-y border-white/8 bg-surface-900/40 relative content-auto">
       <div className="absolute inset-0 bg-gradient-to-b from-brand-600/8 to-accent-500/6 pointer-events-none" />
       <div className="space-y-4">
-        <MarqueeRow items={row1} speed={50} altLabel={altLabel} />
-        {!lite && row2.length > 0 && <MarqueeRow items={row2} reverse speed={45} altLabel={altLabel} />}
+        <MarqueeRow items={row1} speed={50} altLabel={altLabel} locale={locale} />
+        {!lite && row2.length > 0 && <MarqueeRow items={row2} reverse speed={45} altLabel={altLabel} locale={locale} />}
       </div>
     </section>
   )

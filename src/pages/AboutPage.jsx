@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { motion } from 'framer-motion'
 import {
   ArrowLeft, ArrowRight, Target, Eye, Heart, ShieldCheck, Users, MapPin,
@@ -6,11 +5,15 @@ import {
 import { useLanguage } from '../i18n/LanguageContext'
 import { COMPANY, images } from '../data/images'
 import SafeImage from '../components/ui/SafeImage'
+import AppLink from '../components/AppLink'
+import Breadcrumbs from '../components/seo/Breadcrumbs'
+import { buildBreadcrumbs } from '../seo/pageMeta'
+import { homePath, contactHash, careersPath } from '../utils/paths'
 
 const valueIcons = [ShieldCheck, Users, Target, Heart]
 
 export default function AboutPage() {
-  const { t, isRtl } = useLanguage()
+  const { t, isRtl, locale } = useLanguage()
   const Arrow = isRtl ? ArrowLeft : ArrowRight
   const title = t('aboutPage.title')
   const eyebrow = t('aboutPage.eyebrow')
@@ -20,14 +23,7 @@ export default function AboutPage() {
   const values = t('aboutPage.values') || []
   const stats = t('aboutPage.stats') || []
   const why = t('aboutPage.why') || []
-
-  useEffect(() => {
-    const prev = document.title
-    document.title = `${title} | ${t('company.name')}`
-    return () => {
-      document.title = prev
-    }
-  }, [title, t])
+  const crumbs = buildBreadcrumbs({ name: 'about' }, locale)
 
   return (
     <section className="relative min-h-screen pt-24 pb-20">
@@ -44,15 +40,18 @@ export default function AboutPage() {
 
         <div className="absolute inset-0 flex items-end">
           <div className="max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-10">
-            <motion.a
-              href="#/"
+            <motion.div
               initial={{ opacity: 0, x: isRtl ? 12 : -12 }}
               animate={{ opacity: 1, x: 0 }}
-              className="inline-flex items-center gap-2 text-sm text-slate-300 hover:text-brand-400 transition-colors mb-4"
             >
-              <Arrow className={`w-4 h-4 ${isRtl ? '' : 'rotate-180'}`} />
-              {t('aboutPage.back')}
-            </motion.a>
+              <AppLink
+                href={homePath(locale)}
+                className="inline-flex items-center gap-2 text-sm text-slate-300 hover:text-brand-400 transition-colors mb-4"
+              >
+                <Arrow className={`w-4 h-4 ${isRtl ? '' : 'rotate-180'}`} />
+                {t('aboutPage.back')}
+              </AppLink>
+            </motion.div>
             <p className="text-brand-400 text-sm font-bold tracking-wide mb-2">{eyebrow}</p>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight">
               {title}
@@ -62,6 +61,7 @@ export default function AboutPage() {
       </div>
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-10">
+        <Breadcrumbs items={crumbs} />
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -69,12 +69,12 @@ export default function AboutPage() {
         >
           <p className="text-slate-200 text-base sm:text-lg leading-relaxed mb-6">{intro}</p>
           <div className="flex flex-wrap gap-3">
-            <a href="#contact" className="btn-primary text-sm !py-3 !px-6">
+            <AppLink href={contactHash(locale)} className="btn-primary text-sm !py-3 !px-6">
               {t('aboutPage.ctaContact')}
-            </a>
-            <a href="#/careers" className="btn-outline text-sm !py-3 !px-6">
+            </AppLink>
+            <AppLink href={careersPath(locale)} className="btn-outline text-sm !py-3 !px-6">
               {t('aboutPage.ctaCareers')}
-            </a>
+            </AppLink>
           </div>
         </motion.div>
 
@@ -172,8 +172,15 @@ export default function AboutPage() {
             <MapPin className="w-5 h-5 text-brand-400 shrink-0 mt-0.5" />
             <div>
               <p className="text-white font-bold mb-1">{t('company.fullName')}</p>
-              <p className="text-sm text-slate-400">{t('company.address')}</p>
-              <p className="text-sm text-slate-400">{t('company.hours')}</p>
+              <a
+                href={COMPANY.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-brand-400 hover:text-brand-300 transition-colors underline underline-offset-2"
+              >
+                {t('company.address')}
+              </a>
+              <p className="text-sm text-slate-400 mt-1">{t('company.hours')}</p>
             </div>
           </div>
           <div className="flex flex-col sm:items-end gap-1 text-sm">

@@ -30,7 +30,7 @@ export default function Contact() {
     { icon: Phone, label: t('contact.phone'), value: COMPANY.phoneDisplay || COMPANY.phone, href: `tel:${COMPANY.phoneTel || COMPANY.phone.replace(/\s/g, '')}`, ltr: true },
     { icon: Mail, label: t('contact.email'), value: COMPANY.email, href: `mailto:${COMPANY.email}`, ltr: true },
     { icon: Mail, label: t('contact.emailCare'), value: COMPANY.emailCare, href: `mailto:${COMPANY.emailCare}`, ltr: true },
-    { icon: MapPin, label: t('contact.address'), value: t('company.address'), href: '#' },
+    { icon: MapPin, label: t('contact.address'), value: t('company.address'), href: COMPANY.mapsUrl, ltr: false, external: true },
     { icon: Clock, label: t('contact.hours'), value: t('company.hours'), href: '#' },
   ]
 
@@ -103,6 +103,8 @@ export default function Contact() {
               <motion.a
                 key={index}
                 href={item.href}
+                target={item.external ? '_blank' : undefined}
+                rel={item.external ? 'noopener noreferrer' : undefined}
                 initial={{ opacity: 0, x: isRtl ? 20 : -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -115,7 +117,11 @@ export default function Contact() {
                 </div>
                 <div className={item.ltr ? 'text-start' : undefined}>
                   <p className="text-sm text-slate-300">{item.label}</p>
-                  <p className="font-medium" dir={item.ltr ? 'ltr' : undefined} style={item.ltr ? { unicodeBidi: 'isolate' } : undefined}>
+                  <p
+                    className={`font-medium ${item.external ? 'text-brand-400 group-hover:text-brand-300 underline underline-offset-2' : ''}`}
+                    dir={item.ltr ? 'ltr' : undefined}
+                    style={item.ltr ? { unicodeBidi: 'isolate' } : undefined}
+                  >
                     {item.value}
                   </p>
                 </div>
